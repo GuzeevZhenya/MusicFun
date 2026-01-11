@@ -1,5 +1,5 @@
-import type { CurrentUserReaction } from '@/common/enums'
-import type { Images, Tag, User } from '@/common/types'
+import type { CurrentUserReaction } from "@/common/enums/enums"
+import type { Images, Tag, User } from "@/common/types/types"
 
 export type PlaylistsResponse = {
   data: PlaylistData[]
