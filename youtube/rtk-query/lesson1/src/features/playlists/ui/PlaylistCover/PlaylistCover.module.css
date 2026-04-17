@@ -1,0 +1,258 @@
+/* PlaylistCover.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  max-width: 300px;
+  animation: slideUp 0.5s ease;
+}
+
+.coverWrapper {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.coverWrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15), 0 10px 20px -8px rgba(0, 0, 0, 0.1);
+}
+
+.cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.cover.uploading {
+  opacity: 0.7;
+  filter: grayscale(0.5);
+}
+
+/* Hover overlay */
+.hoverOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.overlayContent {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.actionButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  border-radius: 8px;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+}
+
+.actionButton:hover {
+  background: white;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.actionButton:active {
+  transform: scale(0.98);
+}
+
+.actionButton span {
+  font-size: 12px;
+}
+
+.deleteButton {
+  background: rgba(239, 68, 68, 0.95);
+  color: white;
+}
+
+.deleteButton:hover {
+  background: #ef4444;
+}
+
+/* Uploading overlay */
+.uploadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Custom cover badge */
+.customBadge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #10b981;
+  color: white;
+  padding: 6px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+  z-index: 2;
+}
+
+/* Instructions */
+.instructions {
+  text-align: center;
+  max-width: 240px;
+}
+
+.hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.icon {
+  color: #3b82f6;
+  flex-shrink: 0;
+}
+
+.requirements {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+/* Hidden file input */
+.fileInput {
+  display: none;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .container {
+    padding: 16px;
+    max-width: 280px;
+  }
+  
+  .coverWrapper {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .actionButton {
+    padding: 10px;
+    min-width: 70px;
+    font-size: 13px;
+  }
+  
+  .actionButton span {
+    font-size: 11px;
+  }
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-color: #334155;
+  }
+  
+  .coverWrapper {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  }
+  
+  .actionButton {
+    background: rgba(30, 41, 59, 0.95);
+    color: #e2e8f0;
+  }
+  
+  .actionButton:hover {
+    background: #334155;
+  }
+  
+  .uploadingOverlay {
+    background: rgba(15, 23, 42, 0.9);
+    color: #cbd5e1;
+  }
+  
+  .spinner {
+    border-color: #475569;
+    border-top-color: #60a5fa;
+  }
+  
+  .hint {
+    color: #cbd5e1;
+  }
+  
+  .requirements {
+    color: #64748b;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

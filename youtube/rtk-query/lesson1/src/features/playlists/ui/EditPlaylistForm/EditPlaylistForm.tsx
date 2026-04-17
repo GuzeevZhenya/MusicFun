@@ -1,38 +1,88 @@
 import { useUpdatePlaylistMutation } from '@/features/playlists/api/playlistsApi.ts'
-import type { UpdatePlaylistArgs } from '@/features/playlists/api/playlistsApi.types.ts'
+import type { PlaylistData, UpdatePlaylistArgs } from '@/features/playlists/api/playlistsApi.types.ts'
 import type { SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form'
+import s from './EditPlaylistForm.module.css'
 
-type Props = {
-  playlistId: string
-  setPlaylistId: (playlistId: null) => void
-  editPlaylist: (playlist: null) => void
-  register: UseFormRegister<UpdatePlaylistArgs>
-  handleSubmit: UseFormHandleSubmit<UpdatePlaylistArgs>
+// Упрощенный тип для формы
+type EditPlaylistFormData = {
+  title: string
+  description: string
+  tagIds: string[]
 }
 
-export const EditPlaylistForm = ({ playlistId, setPlaylistId, editPlaylist, handleSubmit, register }: Props) => {
+type Props = {
+  playlistId: string | null
+  setPlaylistId: (playlistId: string | null) => void
+  editPlaylist: (playlist: PlaylistData | null) => void
+  register: UseFormRegister<EditPlaylistFormData>
+  handleSubmit: UseFormHandleSubmit<EditPlaylistFormData>
+}
+
+export const EditPlaylistForm = ({
+  playlistId,
+  setPlaylistId,
+  editPlaylist,
+  handleSubmit,
+  register
+}: Props) => {
   const [updatePlaylist] = useUpdatePlaylistMutation()
 
-  const onSubmit: SubmitHandler<UpdatePlaylistArgs> = (body) => {
+  if (!playlistId) return null
+
+  const onSubmit: SubmitHandler<EditPlaylistFormData> = (formData) => {
     if (!playlistId) return
-    updatePlaylist({ playlistId, body }).then(() => {
-      setPlaylistId(null)
-    })
+
+    const apiBody: UpdatePlaylistArgs = {
+      data: {
+        type: 'playlists',
+        attributes: {
+          title: formData.title,
+          description: formData.description,
+          tagIds: formData.tagIds || []
+        }
+      }
+    }
+
+    updatePlaylist({ playlistId, body: apiBody })
+    setPlaylistId(null)
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <h2>Edit playlist</h2>
-      <div>
-        <input {...register('title')} placeholder={'title'} />
+    <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <h2 className={s.title}>Edit Playlist</h2>
+
+      <div className={s.inputGroup}>
+        <input
+          className={s.input}
+          {...register('title')}
+          placeholder="Playlist title"
+        />
       </div>
-      <div>
-        <input {...register('description')} placeholder={'description'} />
+
+      <div className={s.inputGroup}>
+        <input
+          className={s.input}
+          {...register('description')}
+          placeholder="Description (optional)"
+        />
       </div>
-      <button type={'submit'}>save</button>
-      <button type={'button'} onClick={() => editPlaylist(null)}>
-        cancel
-      </button>
+
+      <div className={s.buttonGroup}>
+        <button
+          className={`${s.button} ${s.saveButton}`}
+          type="submit"
+        >
+          Save Changes
+        </button>
+
+        <button
+          className={`${s.button} ${s.cancelButton}`}
+          type="button"
+          onClick={() => editPlaylist(null)}
+        >
+          Cancel
+        </button>
+      </div>
     </form>
   )
 }

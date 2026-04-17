@@ -1,0 +1,77 @@
+.form {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.inputGroup {
+    margin-bottom: 16px;
+}
+
+.input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #1976d2;
+    box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.button {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.saveButton {
+    background-color: #1976d2;
+    color: white;
+}
+
+.saveButton:hover {
+    background-color: #1565c0;
+}
+
+.saveButton:active {
+    background-color: #0d47a1;
+}
+
+.cancelButton {
+    background-color: #f5f5f5;
+    color: #666;
+}
+
+.cancelButton:hover {
+    background-color: #e0e0e0;
+}
+
+.cancelButton:active {
+    background-color: #bdbdbd;
+}

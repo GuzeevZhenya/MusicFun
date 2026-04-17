@@ -33,7 +33,6 @@ export type PlaylistAttributes = {
   currentUserReaction: CurrentUserReaction
 }
 
-// Arguments
 export type FetchPlaylistsArgs = {
   pageNumber?: number
   pageSize?: number
@@ -45,13 +44,34 @@ export type FetchPlaylistsArgs = {
   trackId?: string
 }
 
+// export type CreatePlaylistArgs = {
+//   title: string
+//   description: string
+// }
+
 export type CreatePlaylistArgs = {
-  title: string
-  description: string
+  data: {
+    type: 'playlists'
+    attributes: {
+      title: string
+      description: string
+    }
+  }
 }
 
+// export type UpdatePlaylistArgs = {
+//   title: string
+//   description: string
+//   tagIds: string[]
+// }
+
 export type UpdatePlaylistArgs = {
-  title: string
-  description: string
-  tagIds: string[]
+  data: {
+    type: 'playlists'
+    attributes: {
+      title: string
+      description: string
+      tagIds: string[]
+    }
+  }
 }
